@@ -8,23 +8,12 @@
     <artifactId>morphcx</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>NDEx MorphCX Application</name>
-    <description>Redesign of MorphCX as a multi-module Java application supporting both GUI and CLI front ends.
-    </description>
-    <url>https://github.com/ndextools/morphcx</url>
+    <modules>
+        <module>morphcx.launcher.csv</module>
+    </modules>
 
-    <licenses>
-        <license>
-            <name>MIT License</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <scm>
-        <url>https://github.com/ndextools/morphcx</url>
-        <connection>scm:git:git://github.com/ndextools/morphcx.git</connection>
-        <developerConnection>scm:git:git@github.com:ndextools/morphcx.git</developerConnection>
-    </scm>
+    <packaging>pom</packaging>
+    <name>NDEx MorphCX Application</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -118,5 +107,22 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <description>Redesign of MorphCX as a multi-module Java application supporting both GUI and CLI front ends.
+    </description>
+    <url>https://github.com/ndextools/morphcx</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/ndextools/morphcx</url>
+        <connection>scm:git:git://github.com/ndextools/morphcx.git</connection>
+        <developerConnection>scm:git:git@github.com:ndextools/morphcx.git</developerConnection>
+    </scm>
 
 </project>
