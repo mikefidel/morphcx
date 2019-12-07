@@ -10,6 +10,7 @@
 
     <modules>
         <module>morphcx.launcher.csv</module>
+        <module>morphcx.launcher.poi</module>
     </modules>
 
     <packaging>pom</packaging>
