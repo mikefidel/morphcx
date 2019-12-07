@@ -1,4 +1,4 @@
-# ndex-lemonade
+# morphcx
 
 [UNDER DEVELOPMENT] Redesign of MorphCX as a multi-module Java application 
 supporting both GUI and CLI front ends.
