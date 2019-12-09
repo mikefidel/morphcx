@@ -11,6 +11,8 @@
     <modules>
         <module>morphcx.launcher.csv</module>
         <module>morphcx.launcher.poi</module>
+        <module>morphcx.configuration</module>
+        <module>morphcx.poi</module>
     </modules>
 
     <packaging>pom</packaging>
