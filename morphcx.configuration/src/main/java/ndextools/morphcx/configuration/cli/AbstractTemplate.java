@@ -3,6 +3,7 @@ package ndextools.morphcx.configuration.cli;
 import org.apache.commons.cli.*;
 
 import java.lang.management.ManagementFactory;
+import java.util.Arrays;
 
 /**
  * CLITemplate is an abstract class used for processing command-line options input
@@ -61,7 +62,7 @@ public abstract class AbstractTemplate implements Template {
      *
      * @return an Options object containing valid options and associated parameters.
      */
-    private Options defineSharedOptions() throws ParseException {
+    private Options defineSharedOptions() {
         Options options = new Options();
 
         options.addOption(
@@ -187,6 +188,13 @@ public abstract class AbstractTemplate implements Template {
         public static final String OPT_OUTPUT = "o";
         public static final String LONG_OPT_OUTPUT = "output";
 
+    }
+
+    public String toString() {
+        return "TemplateImpl{" +
+                "commandline=" + Arrays.toString(commandline) +
+                ", appName='" + appName + '\'' +
+                '}';
     }
 
 }

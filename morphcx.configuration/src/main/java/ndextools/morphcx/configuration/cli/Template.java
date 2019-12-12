@@ -6,7 +6,9 @@ import org.apache.commons.cli.ParseException;
 
 public interface Template {
 
-    Configuration configure(Builder builder) throws ParseException;
+    Configuration configure(final Builder builder) throws ParseException;
+
+    String toString();
 
     /**
      * When there are no extended command-line options to define,
@@ -23,4 +25,5 @@ public interface Template {
     default void resolveExtendedOptions(CommandLine parsedCommandline, Builder builder) {
         // There are no extended options to resolve, by default.
     }
+
 }
