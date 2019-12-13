@@ -25,6 +25,7 @@ public class BuilderImpl extends AbstractBuilder {
     public String toString() {
         return "BuilderImpl{" +
                 "commandline=" + Arrays.toString(commandline) +
+                ", appName=" + appName +
                 ", processId=" + processId +
                 ", flagIsDebugMode=" + flagIsDebugMode +
                 ", flagShowHelpPrompt=" + flagShowHelpPrompt +

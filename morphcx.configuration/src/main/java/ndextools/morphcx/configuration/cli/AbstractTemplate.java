@@ -74,7 +74,7 @@ public abstract class AbstractTemplate implements Template {
         options.addOption(
                 Option.builder(SharedCLIOptionConstants.OPT_DEBUG)
                         .longOpt(SharedCLIOptionConstants.LONG_OPT_DEBUG)
-                        .desc("A flag used for debugging and development purposes. < -X | --DEBUG >")
+                        .desc("A flag used for debugging and development purposes. < -X | --debug >")
                         .build()
         );
         options.addOption(
@@ -113,6 +113,7 @@ public abstract class AbstractTemplate implements Template {
 
     private void resolveSharedOptions(final CommandLine parsedCommandline, final Builder builder) {
         processCommandline(builder);
+        processAppName(builder);
         processPID(builder);
         processShowHelpFlag(builder, parsedCommandline);
         processDebugModeFlag(builder, parsedCommandline);
@@ -142,6 +143,10 @@ public abstract class AbstractTemplate implements Template {
         String footer = "";
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp(132, prefix, header, optionDefinitions, footer, true);
+    }
+
+    private void processAppName(final Builder builder) {
+        builder.setAppName(appName);
     }
 
     private void processPID(final Builder builder) {
