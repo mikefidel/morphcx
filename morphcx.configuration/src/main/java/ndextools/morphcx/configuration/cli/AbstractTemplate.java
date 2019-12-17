@@ -104,7 +104,8 @@ public abstract class AbstractTemplate implements Template {
         try {
             parsed = parser.parse(options, cmdline);
         } catch (ParseException e) {
-            String errMsg = this.getClass().getSimpleName() + ": " + e.getMessage();
+//            String errMsg = this.getClass().getSimpleName() + ": " + e.getMessage();
+            String errMsg = appName + ": " + e.getMessage();
             throw new ParseException(errMsg);
         }
 

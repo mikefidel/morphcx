@@ -5,12 +5,15 @@ import ndextools.morphcx.configuration.cli.*;
 public class ExportPOI {
 
     public static void main(final String[] args) {
-        String[] commandline = (args == null) ? new String[0] : args;
+        String[] cmdline = (args == null) ? new String[0] : args;
         String appName = ExportPOI.class.getSimpleName().toLowerCase();
 
         try {
-            Configuration cfg = configureByCLI(commandline, appName);
+            Configuration cfg = configureByCLI(cmdline, appName);
             dispatchByOperation(cfg);
+        } catch (org.apache.commons.cli.ParseException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
