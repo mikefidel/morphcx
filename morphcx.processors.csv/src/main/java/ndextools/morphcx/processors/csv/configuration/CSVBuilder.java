@@ -8,7 +8,7 @@ import ndextools.morphcx.configuration.cli.Builder;
  */
 public interface CSVBuilder extends Builder {
 
-    void setDelimiter(char delimiter);
+    void setFileType(String fileType);
 
     void setNewline(String newline);
 

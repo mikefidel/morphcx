@@ -1,4 +1,5 @@
 module morphcx.launcher.csv {
-    requires morphcx.configuration;
     requires commons.cli;
+    requires morphcx.configuration;
+    requires morphcx.processors.csv;
 }

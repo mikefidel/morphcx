@@ -6,4 +6,9 @@ public class TemplateImpl extends AbstractTemplate {
         super(commandline, appName);
     }
 
+    @Override
+    public String toString() {
+        return "Hello";
+    }
+
 }

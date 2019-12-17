@@ -50,7 +50,6 @@ public abstract class AbstractTemplate implements Template {
         parsedCommandline = parseCommandline(optionDefinitions, commandline);
 
         resolveSharedOptions(parsedCommandline, builder);
-        resolveExtendedOptions(parsedCommandline, builder);
         return builder.getInstance();
     }
 
@@ -196,11 +195,6 @@ public abstract class AbstractTemplate implements Template {
 
     }
 
-    public String toString() {
-        return "TemplateImpl{" +
-                "commandline=" + Arrays.toString(commandline) +
-                ", appName='" + appName + '\'' +
-                '}';
-    }
+    public abstract String toString();
 
 }

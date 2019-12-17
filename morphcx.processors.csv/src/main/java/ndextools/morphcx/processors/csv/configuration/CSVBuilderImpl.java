@@ -10,12 +10,12 @@ import java.util.Arrays;
  * lemonade.csv.configuration.CSVBuilder is an implementation class for CSV-type Configuration objects.
  */
 public final class CSVBuilderImpl extends AbstractBuilder implements Builder, CSVBuilder {
-    private char delimiter;
+    private String fileType;
     private String newline;
 
     @Override
     public AbstractConfiguration getInstance() {
-        return new CSVConfiguration(
+        return new CSVConfigurationImpl(
                 commandline,
                 appName,
                 processId,
@@ -25,14 +25,14 @@ public final class CSVBuilderImpl extends AbstractBuilder implements Builder, CS
                 flagUsesOutputFile,
                 inputFilename,
                 outputFilename,
-                delimiter,
+                fileType,
                 newline
         );
     }
 
     @Override
     public String toString() {
-        return "lemonade.csv.configuration.CSVBuilder{" +
+        return "lemonade.csv.configuration.CSVBuilderImpl{" +
                 "commandline=" + Arrays.toString(commandline) +
                 ", appName=" + appName +
                 ", processId=" + processId +
@@ -42,13 +42,13 @@ public final class CSVBuilderImpl extends AbstractBuilder implements Builder, CS
                 ", flagUsesOutputFile=" + flagUsesOutputFile +
                 ", inputFilename=" + inputFilename +
                 ", outputFilename=" + outputFilename +
-                ", delimiter=" + delimiter +
+                ", fileType=" + fileType +
                 ", newline=" + newline +
                 '}';
     }
 
-    public void setDelimiter(char delimiter) {
-        this.delimiter = delimiter;
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
     }
 
     public void setNewline(String newline) {

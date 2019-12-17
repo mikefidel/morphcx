@@ -8,11 +8,11 @@ import java.util.Optional;
 /**
  * CSVConfiguration is the implementation class for the application configuration object.
  */
-public final class CSVConfiguration extends AbstractConfiguration {
-    private final char delimiter;
+public final class CSVConfigurationImpl extends AbstractConfiguration {
+    private final String fileType;
     private final String newline;
 
-    public CSVConfiguration(
+    public CSVConfigurationImpl(
             String[] commandline,
             String appName,
             String processId,
@@ -22,7 +22,7 @@ public final class CSVConfiguration extends AbstractConfiguration {
             boolean flagUsesOutputFile,
             Optional<String> inputFilename,
             Optional<String> outputFilename,
-            char delimiter,
+            String fileType,
             String newline)
     {
         super(commandline,
@@ -35,7 +35,7 @@ public final class CSVConfiguration extends AbstractConfiguration {
                 inputFilename,
                 outputFilename);
 
-        this.delimiter = delimiter;
+        this.fileType = fileType;
         this.newline = newline;
     }
 
@@ -44,8 +44,8 @@ public final class CSVConfiguration extends AbstractConfiguration {
      * Getter method
      * @return character used to delimit individual fields, usually a tab or a comma character.
      */
-    public char getDelimiter() {
-        return delimiter;
+    public String getFileType() {
+        return fileType;
     }
 
 
@@ -63,7 +63,7 @@ public final class CSVConfiguration extends AbstractConfiguration {
      */
     @Override
     public String toString() {
-        return "CSVConfiguration{" +
+        return "CSVConfigurationImpl{" +
                 "commandline=" + Arrays.toString(getCommandline()) +
                 ", appName=" + getAppName() +
                 ", processId=" + getProcessId() +
@@ -73,7 +73,7 @@ public final class CSVConfiguration extends AbstractConfiguration {
                 ", flagUsesOutputFile=" + usesOutputFile() +
                 ", inputFilename=" + getInputFilename() +
                 ", outputFilename=" + getOutputFilename() +
-                ", delimiter=" + getDelimiter() +
+                ", delimiter=" + getFileType() +
                 ", newline=" + getNewline() +
                 '}';
     }
