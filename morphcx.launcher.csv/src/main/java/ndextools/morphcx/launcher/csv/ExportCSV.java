@@ -4,6 +4,9 @@ import ndextools.morphcx.configuration.cli.*;
 import ndextools.morphcx.processors.csv.configuration.CSVBuilderImpl;
 import ndextools.morphcx.processors.csv.configuration.CSVTemplateImpl;
 
+/**
+ * Root program containing entry point to launch application by commandline.
+ */
 public class ExportCSV {
 
     public static void main(final String[] args) {

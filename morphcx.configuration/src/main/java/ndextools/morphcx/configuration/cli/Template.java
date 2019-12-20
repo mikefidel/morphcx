@@ -7,8 +7,6 @@ public interface Template {
 
     Configuration configure(final Builder builder) throws ParseException;
 
-    String toString();
-
     /**
      * When there are no extended command-line options to define,
      * only base options are processed by default

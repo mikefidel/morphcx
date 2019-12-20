@@ -198,6 +198,4 @@ public abstract class AbstractTemplate implements Template {
 
     protected abstract Builder resolveExtendedOptions(CommandLine parsedCommandline, Builder builder);
 
-    public abstract String toString();
-
 }

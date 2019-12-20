@@ -2,6 +2,9 @@ package ndextools.morphcx.launcher.poi;
 
 import ndextools.morphcx.configuration.cli.*;
 
+/**
+ * Root program containing entry point to launch application by commandline.
+ */
 public class ExportPOI {
 
     public static void main(final String[] args) {

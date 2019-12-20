@@ -7,7 +7,10 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
-public final class CSVTemplateImpl extends AbstractTemplate implements Template, CSVTemplate {
+/**
+ * Implementation class for creating CSV-type Configuration objects/
+ */
+public final class CSVTemplateImpl extends AbstractTemplate implements Template {
     private String fileType;
     private String newline;
 
@@ -24,7 +27,7 @@ public final class CSVTemplateImpl extends AbstractTemplate implements Template,
      * @return an Options object containing valid options and associated parameters.
      */
     @Override
-    public Options defineExtendedOptions(Options options) {
+    public final Options defineExtendedOptions(final Options options) {
         options.addOption(
                 Option.builder(CSVOptionConstants.OPT_NEWLINE)
                         .longOpt(CSVOptionConstants.LONG_OPT_NEWLINE)
@@ -47,10 +50,11 @@ public final class CSVTemplateImpl extends AbstractTemplate implements Template,
     /**
      * This method interrogates and resolves CSV-specific options found on the command-line
      * when the program is invoked.
-     * @return
+     *
+     * @return Builder object containing setter properties and methods.
      */
     @Override
-    public Builder resolveExtendedOptions(CommandLine parsedCommandline, Builder builder) {
+    public final Builder resolveExtendedOptions(final CommandLine parsedCommandline, final Builder builder) {
         Builder build = processNewline((CSVBuilder) builder, parsedCommandline);
         processSeparator((CSVBuilder) builder, parsedCommandline);
         return build;
@@ -102,24 +106,6 @@ public final class CSVTemplateImpl extends AbstractTemplate implements Template,
         }
 
         return builder;
-    }
-
-    @Override
-    public String toString() {
-
-        /**
-         * Overrides Object.toString()
-         * @return state of the CSVConfiguration object properties as a formatted string.
-         */
-        return "CSVTemplateImpl{" +
-                ", fileType=" + fileType +
-                ", newline=" + newline +
-                '}';
-    }
-
-    @Override
-    public Builder resolveExtendedOptions(CommandLine parsedCommandline, CSVBuilder builder) {
-        return null;
     }
 
     /**

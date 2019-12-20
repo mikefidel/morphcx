@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class BuilderImpl extends AbstractBuilder {
 
     @Override
-    public Configuration getInstance() {
+    public final Configuration getInstance() {
         return new ConfigurationImpl(
                 commandline,
                 appName,
@@ -22,7 +22,7 @@ public class BuilderImpl extends AbstractBuilder {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return "BuilderImpl{" +
                 "commandline=" + Arrays.toString(commandline) +
                 ", appName=" + appName +

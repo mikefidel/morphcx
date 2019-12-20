@@ -7,7 +7,7 @@ import ndextools.morphcx.configuration.cli.Builder;
 import java.util.Arrays;
 
 /**
- * lemonade.csv.configuration.CSVBuilder is an implementation class for CSV-type Configuration objects.
+ * CSVBuilder is an implementation class for CSV-type Configuration objects.
  */
 public final class CSVBuilderImpl extends AbstractBuilder implements Builder, CSVBuilder {
     private String fileType;
@@ -47,12 +47,12 @@ public final class CSVBuilderImpl extends AbstractBuilder implements Builder, CS
                 '}';
     }
 
-    public void setFileType(String ft) {
-        fileType = ft;
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
     }
 
-    public void setNewline(String nl) {
-        newline = nl;
+    public void setNewline(String newline) {
+        this.newline = newline;
     }
 
 }

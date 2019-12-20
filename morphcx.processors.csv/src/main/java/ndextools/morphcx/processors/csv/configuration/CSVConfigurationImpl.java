@@ -39,7 +39,6 @@ public final class CSVConfigurationImpl extends AbstractConfiguration {
         this.newline = newline;
     }
 
-
     /**
      * Getter method
      * @return character used to delimit individual fields, usually a tab or a comma character.
@@ -47,7 +46,6 @@ public final class CSVConfigurationImpl extends AbstractConfiguration {
     public String getFileType() {
         return fileType;
     }
-
 
     /**
      * Getter method

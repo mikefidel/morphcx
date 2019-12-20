@@ -13,9 +13,4 @@ public class TemplateImpl extends AbstractTemplate {
         return builder;
     }
 
-    @Override
-    public String toString() {
-        return "Hello";
-    }
-
 }

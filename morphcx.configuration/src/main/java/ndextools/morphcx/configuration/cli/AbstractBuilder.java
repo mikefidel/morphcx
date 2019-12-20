@@ -38,27 +38,27 @@ public abstract class AbstractBuilder implements Builder {
     }
 
     public void setIsDebugMode(boolean debugMode) {
-        flagIsDebugMode = debugMode;
+        this.flagIsDebugMode = debugMode;
     }
 
     public void setShowHelpPrompt(boolean isShowHelpPrompt) {
-        flagShowHelpPrompt = isShowHelpPrompt;
+        this.flagShowHelpPrompt = isShowHelpPrompt;
     }
 
     public void setUsesInputFile(boolean usesInputFile) {
-        flagUsesInputFile = usesInputFile;
+        this.flagUsesInputFile = usesInputFile;
     }
 
     public void setUsesOutputFile(boolean usesOutputFile) {
-        flagUsesOutputFile = usesOutputFile;
+        this.flagUsesOutputFile = usesOutputFile;
     }
 
     public void setInputFilename(Optional<String> filename) {
-        inputFilename = filename;
+        this.inputFilename = filename;
     }
 
     public void setOutputFilename(Optional<String> filename) {
-        outputFilename = filename;
+        this.outputFilename = filename;
     }
 
 }
