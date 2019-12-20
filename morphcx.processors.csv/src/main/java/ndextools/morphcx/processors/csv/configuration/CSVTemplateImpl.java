@@ -1,6 +1,7 @@
 package ndextools.morphcx.processors.csv.configuration;
 
 import ndextools.morphcx.configuration.cli.AbstractTemplate;
+import ndextools.morphcx.configuration.cli.Builder;
 import ndextools.morphcx.configuration.cli.Template;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
@@ -14,19 +15,6 @@ public final class CSVTemplateImpl extends AbstractTemplate implements Template,
         super(commandline, appName);
         this.fileType = CSVOptionConstants.TAB;
         this.newline = CSVOptionConstants.SYSTEM;
-    }
-
-    @Override
-    public String toString() {
-
-        /**
-         * Overrides Object.toString()
-         * @return state of the CSVConfiguration object properties as a formatted string.
-         */
-        return "CSVTemplateImpl{" +
-                ", fileType=" + fileType +
-                ", newline=" + newline +
-                '}';
     }
 
     /**
@@ -59,15 +47,16 @@ public final class CSVTemplateImpl extends AbstractTemplate implements Template,
     /**
      * This method interrogates and resolves CSV-specific options found on the command-line
      * when the program is invoked.
+     * @return
      */
     @Override
-    public void resolveExtendedOptions(CommandLine parsedCommandline, CSVBuilder builder) {
-        processNewline(builder, parsedCommandline);
-        processSeparator(builder, parsedCommandline);
-
+    public Builder resolveExtendedOptions(CommandLine parsedCommandline, Builder builder) {
+        Builder build = processNewline((CSVBuilder) builder, parsedCommandline);
+        processSeparator((CSVBuilder) builder, parsedCommandline);
+        return build;
     }
 
-    private void processNewline(CSVBuilder builder, CommandLine parsedCommandline) {
+    private Builder processNewline(CSVBuilder builder, CommandLine parsedCommandline) {
 
         if (parsedCommandline.hasOption(CSVOptionConstants.OPT_NEWLINE)) {
             String nl = parsedCommandline.getOptionValue(CSVOptionConstants.OPT_NEWLINE).toUpperCase();
@@ -93,25 +82,44 @@ public final class CSVTemplateImpl extends AbstractTemplate implements Template,
         } else {
             builder.setNewline(CSVOptionConstants.SYSTEM);
         }
+
+        return builder;
     }
 
-    private void processSeparator(CSVBuilder builder, CommandLine parsedCommandline) {
+    private Builder processSeparator(CSVBuilder builder, CommandLine parsedCommandline) {
         if (parsedCommandline.hasOption(CSVOptionConstants.OPT_FILETYPE)) {
-            String nl = parsedCommandline.getOptionValue(CSVOptionConstants.OPT_FILETYPE).toUpperCase();
-            switch (nl) {
+            String ft = parsedCommandline.getOptionValue(CSVOptionConstants.OPT_FILETYPE).toUpperCase();
+            switch (ft) {
                 case CSVOptionConstants.TAB:
-                    builder.setNewline(CSVOptionConstants.TAB);
+                    builder.setFileType(CSVOptionConstants.TAB);
                     break;
                 case CSVOptionConstants.COMMA:
-                    builder.setNewline(CSVOptionConstants.COMMA);
-                    break;
-                default:
-                    builder.setNewline(CSVOptionConstants.TAB);
+                    builder.setFileType(CSVOptionConstants.COMMA);
                     break;
             }
         } else {
-            builder.setNewline(CSVOptionConstants.TAB);
+            builder.setFileType(CSVOptionConstants.TAB);
         }
+
+        return builder;
+    }
+
+    @Override
+    public String toString() {
+
+        /**
+         * Overrides Object.toString()
+         * @return state of the CSVConfiguration object properties as a formatted string.
+         */
+        return "CSVTemplateImpl{" +
+                ", fileType=" + fileType +
+                ", newline=" + newline +
+                '}';
+    }
+
+    @Override
+    public Builder resolveExtendedOptions(CommandLine parsedCommandline, CSVBuilder builder) {
+        return null;
     }
 
     /**

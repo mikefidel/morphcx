@@ -30,7 +30,6 @@ public class ExportPOI {
     private static void dispatchByOperation(final Configuration cfg) {
         if (!cfg.isShowHelpPrompt()) {
             // TODO
-//            System.err.println(cfg.toString());
         }
     }
 

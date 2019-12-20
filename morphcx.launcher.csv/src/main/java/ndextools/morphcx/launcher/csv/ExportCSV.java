@@ -32,7 +32,6 @@ public class ExportCSV {
     private static void dispatchByOperation(final Configuration cfg) {
         if (!cfg.isShowHelpPrompt()) {
             // TODO
-            System.err.println(cfg.toString()); // TODO remove!
         }
     }
 

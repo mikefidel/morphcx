@@ -32,7 +32,7 @@ public final class CSVBuilderImpl extends AbstractBuilder implements Builder, CS
 
     @Override
     public String toString() {
-        return "lemonade.csv.configuration.CSVBuilderImpl{" +
+        return "CSVBuilderImpl{" +
                 "commandline=" + Arrays.toString(commandline) +
                 ", appName=" + appName +
                 ", processId=" + processId +
@@ -47,12 +47,12 @@ public final class CSVBuilderImpl extends AbstractBuilder implements Builder, CS
                 '}';
     }
 
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
+    public void setFileType(String ft) {
+        fileType = ft;
     }
 
-    public void setNewline(String newline) {
-        this.newline = newline;
+    public void setNewline(String nl) {
+        newline = nl;
     }
 
 }

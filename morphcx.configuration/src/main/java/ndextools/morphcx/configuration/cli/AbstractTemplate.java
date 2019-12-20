@@ -3,7 +3,6 @@ package ndextools.morphcx.configuration.cli;
 import org.apache.commons.cli.*;
 
 import java.lang.management.ManagementFactory;
-import java.util.Arrays;
 
 /**
  * CLITemplate is an abstract class used for processing command-line options input
@@ -41,7 +40,7 @@ public abstract class AbstractTemplate implements Template {
      * @throws ParseException when an invalid option is found in the command-line passed when the
      *                        application is invoked.
      */
-    public final Configuration configure(final Builder builder) throws ParseException {
+    public final Configuration configure(Builder builder) throws ParseException {
         CommandLine parsedCommandline;
 
         optionDefinitions = defineSharedOptions();
@@ -49,7 +48,8 @@ public abstract class AbstractTemplate implements Template {
 
         parsedCommandline = parseCommandline(optionDefinitions, commandline);
 
-        resolveSharedOptions(parsedCommandline, builder);
+        builder = resolveSharedOptions(parsedCommandline, builder);
+        builder = resolveExtendedOptions(parsedCommandline, builder);
         return builder.getInstance();
     }
 
@@ -111,7 +111,7 @@ public abstract class AbstractTemplate implements Template {
         return parsed;
     }
 
-    private void resolveSharedOptions(final CommandLine parsedCommandline, final Builder builder) {
+    private Builder resolveSharedOptions(final CommandLine parsedCommandline, final Builder builder) {
         processCommandline(builder);
         processAppName(builder);
         processPID(builder);
@@ -122,6 +122,7 @@ public abstract class AbstractTemplate implements Template {
 
         // TODO resolve other shared options
 
+        return builder;
     }
 
     private void processDebugModeFlag(final Builder builder, final CommandLine parsedCommandline) {
@@ -194,6 +195,8 @@ public abstract class AbstractTemplate implements Template {
         public static final String LONG_OPT_OUTPUT = "output";
 
     }
+
+    protected abstract Builder resolveExtendedOptions(CommandLine parsedCommandline, Builder builder);
 
     public abstract String toString();
 
