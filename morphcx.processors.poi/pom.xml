@@ -10,18 +10,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>morphcx.poi</artifactId>
-    <packaging>jar</packaging>
-
-    <name>morphcx.poi</name>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.ndextools</groupId>
-            <artifactId>morphcx.configuration</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+    <artifactId>morphcx.processors.poi</artifactId>
 
 </project>
