@@ -22,7 +22,7 @@ public final class TemplateBaseOptions extends TemplateAbstraction implements Te
     public Configuration configure(Builder bldr) throws ParseException {
 
         // Apache Commons CLI Step 1
-        Options optionDefinitions = defineBaseOptions();
+        optionDefinitions = defineBaseOptions();
 
         // Apache Commons CLI Step 2
         CommandLine parsedCommandline = parseCommandline(optionDefinitions, commandline);

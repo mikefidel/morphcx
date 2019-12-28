@@ -31,21 +31,20 @@ public final class CSVTemplate extends TemplateAbstraction implements Template {
     public Configuration configure(Builder bldr) throws ParseException {
 
         // Apache Commons CLI Step 1
-        Options optionDefinitions = defineBaseOptions();
+        optionDefinitions = defineBaseOptions();
         optionDefinitions = defineExtendedOptions(optionDefinitions);
 
         // Apache Commons CLI Step 2
         CommandLine parsedCommandline = parseCommandline(optionDefinitions, commandline);
 
         // Apache Commons CLI Step 3
-        Builder builder = resolveBaseOptions(parsedCommandline, bldr);
-//        builder = resolveExtendedOptions(parsedCommandline, builder);
+        bldr = resolveBaseOptions(parsedCommandline, bldr);
+        Builder builder = resolveExtendedOptions(parsedCommandline, (CSVBuilder) bldr);
 
         // Create instance of Configuration
         return builder.getInstance();
     }
 
-//    @Override
     public Options defineExtendedOptions(final Options options) throws ParseException {
         options.addOption(
                 Option.builder(CSVOptionConstants.OPT_NEWLINE)
@@ -66,57 +65,55 @@ public final class CSVTemplate extends TemplateAbstraction implements Template {
         return options;
     }
 
-//    @Override
-    public Builder resolveExtendedOptions(CommandLine parsedCommandline, Builder bldr) {
-        Builder builder = processNewline(bldr, parsedCommandline);
-        builder = processSeparator(bldr, parsedCommandline);
+    public CSVBuilder resolveExtendedOptions(CommandLine parsedCommandline, CSVBuilder bldr) {
+        bldr = processNewlineX(bldr, parsedCommandline);
+        bldr = processSeparatorX(bldr, parsedCommandline);
+        return bldr;
+    }
+
+    private CSVBuilder processNewlineX(CSVBuilder builder, CommandLine parsedCommandline) {
+        if (parsedCommandline.hasOption(CSVOptionConstants.OPT_NEWLINE)) {
+            String nl = parsedCommandline.getOptionValue(CSVOptionConstants.OPT_NEWLINE).toUpperCase();
+            switch (nl) {
+                case CSVOptionConstants.WINDOWS:
+                    builder.setNewline(CSVOptionConstants.WINDOWS);
+                    break;
+                case CSVOptionConstants.LINUX:
+                    builder.setNewline(CSVOptionConstants.LINUX);
+                    break;
+                case CSVOptionConstants.OSX:
+                    builder.setNewline(CSVOptionConstants.OSX);
+                    break;
+                case CSVOptionConstants.MAC:
+                    builder.setNewline(CSVOptionConstants.MAC);
+                    break;
+                case CSVOptionConstants.SYSTEM:
+                    builder.setNewline(CSVOptionConstants.SYSTEM);
+                default:
+                    builder.setNewline(CSVOptionConstants.SYSTEM);
+                    break;
+            }
+        } else {
+            builder.setNewline(CSVOptionConstants.SYSTEM);
+        }
+
         return builder;
     }
 
-    private Builder processNewline(Builder builder, CommandLine parsedCommandline) {
-
-//        if (parsedCommandline.hasOption(CSVOptionConstants.OPT_NEWLINE)) {
-//            String nl = parsedCommandline.getOptionValue(CSVOptionConstants.OPT_NEWLINE).toUpperCase();
-//            switch (nl) {
-//                case CSVOptionConstants.WINDOWS:
-//                    builder.setNewline(CSVOptionConstants.WINDOWS);
-//                    break;
-//                case CSVOptionConstants.LINUX:
-//                    builder.setNewline(CSVOptionConstants.LINUX);
-//                    break;
-//                case CSVOptionConstants.OSX:
-//                    builder.setNewline(CSVOptionConstants.OSX);
-//                    break;
-//                case CSVOptionConstants.MAC:
-//                    builder.setNewline(CSVOptionConstants.MAC);
-//                    break;
-//                case CSVOptionConstants.SYSTEM:
-//                    builder.setNewline(CSVOptionConstants.SYSTEM);
-//                default:
-//                    builder.setNewline(CSVOptionConstants.SYSTEM);
-//                    break;
-//            }
-//        } else {
-//            builder.setNewline(CSVOptionConstants.SYSTEM);
-//        }
-
-        return builder;
-    }
-
-    private Builder processSeparator(Builder builder, CommandLine parsedCommandline) {
-//        if (parsedCommandline.hasOption(CSVOptionConstants.OPT_FILETYPE)) {
-//            String ft = parsedCommandline.getOptionValue(CSVOptionConstants.OPT_FILETYPE).toUpperCase();
-//            switch (ft) {
-//                case CSVOptionConstants.TAB:
-//                    builder.setFileType(CSVOptionConstants.TAB);
-//                    break;
-//                case CSVOptionConstants.COMMA:
-//                    builder.setFileType(CSVOptionConstants.COMMA);
-//                    break;
-//            }
-//        } else {
-//            builder.setFileType(CSVOptionConstants.TAB);
-//        }
+    private CSVBuilder processSeparatorX(CSVBuilder builder, CommandLine parsedCommandline) {
+        if (parsedCommandline.hasOption(CSVOptionConstants.OPT_FILETYPE)) {
+            String ft = parsedCommandline.getOptionValue(CSVOptionConstants.OPT_FILETYPE).toUpperCase();
+            switch (ft) {
+                case CSVOptionConstants.TAB:
+                    builder.setFileType(CSVOptionConstants.TAB);
+                    break;
+                case CSVOptionConstants.COMMA:
+                    builder.setFileType(CSVOptionConstants.COMMA);
+                    break;
+            }
+        } else {
+            builder.setFileType(CSVOptionConstants.TAB);
+        }
 
         return builder;
     }

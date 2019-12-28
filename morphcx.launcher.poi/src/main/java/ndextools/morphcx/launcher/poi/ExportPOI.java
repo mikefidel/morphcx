@@ -13,6 +13,7 @@ public class ExportPOI {
 
         try {
             Configuration cfg = configureByCLI(cmdline, appName);
+            System.err.println(cfg.toString());  // TODO remove
             dispatchByOperation(cfg);
         } catch (org.apache.commons.cli.ParseException e) {
             System.err.println(e.getMessage());
@@ -34,6 +35,7 @@ public class ExportPOI {
         if (!cfg.isShowHelpPrompt()) {
             // TODO
         }
+        System.err.println(cfg.toString()); // TODO remove
     }
 
 }

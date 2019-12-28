@@ -5,6 +5,7 @@ import ndextools.morphcx.configuration.cli.base.Configuration;
 import ndextools.morphcx.configuration.cli.base.Template;
 import ndextools.morphcx.configuration.cli.csv.CSVBuilder;
 import ndextools.morphcx.configuration.cli.base.TemplateBaseOptions;
+import ndextools.morphcx.configuration.cli.csv.CSVTemplate;
 
 /**
  * Root program containing entry point to launch application by commandline.
@@ -29,8 +30,8 @@ public class ExportCSV {
 
     private static Configuration configureByCLI(final String[] commandline, final String appName)
             throws org.apache.commons.cli.ParseException {
-        Template template = new TemplateBaseOptions(commandline, appName);
-        Builder builder = new CSVBuilder();
+        Template template = new CSVTemplate(commandline, appName);
+        CSVBuilder builder = new CSVBuilder();
         return template.configure(builder);
     }
 
@@ -38,6 +39,7 @@ public class ExportCSV {
         if (!cfg.isShowHelpPrompt()) {
             // TODO
         }
+        System.err.println(cfg.toString()); // TODO remove
     }
 
 }
