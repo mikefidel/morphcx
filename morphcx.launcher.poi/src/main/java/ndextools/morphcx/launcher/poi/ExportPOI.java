@@ -1,6 +1,6 @@
 package ndextools.morphcx.launcher.poi;
 
-import ndextools.morphcx.configuration.cli.*;
+import ndextools.morphcx.configuration.cli.base.*;
 
 /**
  * Root program containing entry point to launch application by commandline.

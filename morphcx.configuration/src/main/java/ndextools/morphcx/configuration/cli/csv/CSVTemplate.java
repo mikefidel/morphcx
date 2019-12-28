@@ -1,9 +1,9 @@
-package ndextools.morphcx.processors.csv.configuration;
+package ndextools.morphcx.configuration.cli.csv;
 
-import ndextools.morphcx.configuration.cli.Builder;
-import ndextools.morphcx.configuration.cli.Configuration;
-import ndextools.morphcx.configuration.cli.Template;
-import ndextools.morphcx.configuration.cli.TemplateAbstraction;
+import ndextools.morphcx.configuration.cli.base.Builder;
+import ndextools.morphcx.configuration.cli.base.Configuration;
+import ndextools.morphcx.configuration.cli.base.Template;
+import ndextools.morphcx.configuration.cli.base.TemplateAbstraction;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;

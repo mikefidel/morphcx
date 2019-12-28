@@ -1,8 +1,10 @@
 package ndextools.morphcx.launcher.csv;
 
-import ndextools.morphcx.configuration.cli.*;
-import ndextools.morphcx.processors.csv.configuration.CSVBuilder;
-import ndextools.morphcx.configuration.cli.TemplateBaseOptions;
+import ndextools.morphcx.configuration.cli.base.Builder;
+import ndextools.morphcx.configuration.cli.base.Configuration;
+import ndextools.morphcx.configuration.cli.base.Template;
+import ndextools.morphcx.configuration.cli.csv.CSVBuilder;
+import ndextools.morphcx.configuration.cli.base.TemplateBaseOptions;
 
 /**
  * Root program containing entry point to launch application by commandline.

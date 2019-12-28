@@ -1,4 +1,4 @@
-package ndextools.morphcx.configuration.cli;
+package ndextools.morphcx.configuration.cli.base;
 
 import java.util.Arrays;
 

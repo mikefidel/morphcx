@@ -1,7 +1,7 @@
-package ndextools.morphcx.processors.csv.configuration;
+package ndextools.morphcx.configuration.cli.csv;
 
-import ndextools.morphcx.configuration.cli.Configuration;
-import ndextools.morphcx.configuration.cli.ConfigurationAbstraction;
+import ndextools.morphcx.configuration.cli.base.Configuration;
+import ndextools.morphcx.configuration.cli.base.ConfigurationAbstraction;
 
 import java.util.Arrays;
 import java.util.Optional;

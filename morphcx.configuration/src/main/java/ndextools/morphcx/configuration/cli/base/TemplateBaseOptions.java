@@ -1,4 +1,4 @@
-package ndextools.morphcx.configuration.cli;
+package ndextools.morphcx.configuration.cli.base;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
