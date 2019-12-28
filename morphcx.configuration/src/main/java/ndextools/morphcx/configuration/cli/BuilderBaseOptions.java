@@ -5,11 +5,11 @@ import java.util.Arrays;
 /**
  * BuilderImpl is an implementation class for a default configuration object.
  */
-public class BuilderImpl extends AbstractBuilder {
+public class BuilderBaseOptions extends BuilderAbstraction {
 
     @Override
     public final Configuration getInstance() {
-        return new ConfigurationImpl(
+        return new ConfigurationBaseOptions(
                 commandline,
                 appName,
                 processId,

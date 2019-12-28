@@ -1,8 +1,8 @@
 package ndextools.morphcx.launcher.csv;
 
 import ndextools.morphcx.configuration.cli.*;
-import ndextools.morphcx.processors.csv.configuration.CSVBuilderImpl;
-import ndextools.morphcx.processors.csv.configuration.CSVTemplateImpl;
+import ndextools.morphcx.processors.csv.configuration.CSVBuilder;
+import ndextools.morphcx.configuration.cli.TemplateBaseOptions;
 
 /**
  * Root program containing entry point to launch application by commandline.
@@ -10,11 +10,11 @@ import ndextools.morphcx.processors.csv.configuration.CSVTemplateImpl;
 public class ExportCSV {
 
     public static void main(final String[] args) {
-        String[] commandline = (args == null) ? new String[0] : args;
+        String[] cmdline = (args == null) ? new String[0] : args;
         String appName = ExportCSV.class.getSimpleName().toLowerCase();
 
         try {
-            Configuration cfg = configureByCLI(commandline, appName);
+            Configuration cfg = configureByCLI(cmdline, appName);
             dispatchByOperation(cfg);
         } catch (org.apache.commons.cli.ParseException e) {
             System.err.println(e.getMessage());
@@ -27,8 +27,8 @@ public class ExportCSV {
 
     private static Configuration configureByCLI(final String[] commandline, final String appName)
             throws org.apache.commons.cli.ParseException {
-        Template template = new CSVTemplateImpl(commandline, appName);
-        Builder builder = new CSVBuilderImpl();
+        Template template = new TemplateBaseOptions(commandline, appName);
+        Builder builder = new CSVBuilder();
         return template.configure(builder);
     }
 

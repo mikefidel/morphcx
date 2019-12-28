@@ -1,18 +1,19 @@
 package ndextools.morphcx.processors.csv.configuration;
 
-import ndextools.morphcx.configuration.cli.AbstractConfiguration;
+import ndextools.morphcx.configuration.cli.Configuration;
+import ndextools.morphcx.configuration.cli.ConfigurationAbstraction;
 
 import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * CSVConfiguration is the implementation class for the application configuration object.
+ * Implementation class for CSVConfiguration objects.
  */
-public final class CSVConfigurationImpl extends AbstractConfiguration {
+public final class CSVConfiguration extends ConfigurationAbstraction implements Configuration {
     private final String fileType;
     private final String newline;
 
-    public CSVConfigurationImpl(
+    public CSVConfiguration(
             String[] commandline,
             String appName,
             String processId,
@@ -41,7 +42,8 @@ public final class CSVConfigurationImpl extends AbstractConfiguration {
 
     /**
      * Getter method
-     * @return character used to delimit individual fields, usually a tab or a comma character.
+     * @return character used to delimit individual fields, usually a tab or a comma character. Closely
+     *      associated with file type extensions such as .csv or .tsv
      */
     public String getFileType() {
         return fileType;
@@ -57,11 +59,11 @@ public final class CSVConfigurationImpl extends AbstractConfiguration {
 
     /**
      * Overrides Object.toString()
-     * @return state of the CSVConfiguration object properties as a formatted string.
+     * @return CSVConfiguration object properties as a formatted string.
      */
     @Override
     public String toString() {
-        return "CSVConfigurationImpl{" +
+        return "CSVConfiguration{" +
                 "commandline=" + Arrays.toString(getCommandline()) +
                 ", appName=" + getAppName() +
                 ", processId=" + getProcessId() +

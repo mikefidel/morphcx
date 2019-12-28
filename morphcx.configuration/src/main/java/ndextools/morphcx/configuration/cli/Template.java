@@ -1,18 +1,15 @@
 package ndextools.morphcx.configuration.cli;
 
+import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 public interface Template {
 
-    Configuration configure(final Builder builder) throws ParseException;
+    Configuration configure(final Builder bldr) throws ParseException;
 
-    /**
-     * When there are no extended command-line options to define,
-     * only base options are processed by default
-     */
-    default Options defineExtendedOptions(Options options) throws ParseException {
-        return options;
-    }
+//    Options defineExtendedOptions(Options opts) throws ParseException;
+//
+//    Builder resolveExtendedOptions(final CommandLine parsedCommandline, final Builder bldr);
 
 }

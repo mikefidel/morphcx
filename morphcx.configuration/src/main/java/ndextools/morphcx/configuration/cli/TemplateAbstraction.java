@@ -21,71 +21,57 @@ import java.lang.management.ManagementFactory;
  * <p>
  * In addition to the template method, it also contains a number of helper methods.
  */
-public abstract class AbstractTemplate implements Template {
-    private final String[] commandline;
-    private final String appName;
-    private Options optionDefinitions;
+public abstract class TemplateAbstraction implements Template {
+    protected final String[] commandline;
+    protected final String appName;
+    protected Options optionDefinitions;
 
-    public AbstractTemplate(final String[] commandline, final String appName) {
+    /**
+     * Constructor
+     * @param commandline command-line when application was invoked
+     * @param appName class used to launch this application
+     */
+    public TemplateAbstraction(final String[] commandline, final String appName) {
         this.commandline = commandline;
         this.appName = appName;
     }
 
-    /**
-     * This is the template method for creating Apache CLI-based Configuration objects.
-     *
-     * @param builder Builder object that contains all setter methods for the Configuration type being
-     *                built, as well as methods involved in determining its property values.
-     * @return resulting immutable Configuration object
-     * @throws ParseException when an invalid option is found in the command-line passed when the
-     *                        application is invoked.
-     */
-    public final Configuration configure(Builder builder) throws ParseException {
-        CommandLine parsedCommandline;
-
-        optionDefinitions = defineSharedOptions();
-        optionDefinitions = defineExtendedOptions(optionDefinitions);
-
-        parsedCommandline = parseCommandline(optionDefinitions, commandline);
-
-        builder = resolveSharedOptions(parsedCommandline, builder);
-        builder = resolveExtendedOptions(parsedCommandline, builder);
-        return builder.getInstance();
-    }
+    public abstract Configuration configure(Builder bldr) throws ParseException;
 
     /**
      * This method is the 1st of 3 steps that Apache CLI uses to process command-line options.
-     * All valid shared options are defined here; a shared option is an option that can be used
-     * in all invoking command-lines. Extended options are defined in Template subclasses
-     * associated with that type.
+     * All valid base options are defined here; a base option is a commandline option that can
+     * be used at all times and circumstances. Additional options that are associated with a
+     * specific process are extended options. Extended options cannot be used at all times
+     * and circumstances -- they are unique to that particular process.
      *
      * @return an Options object containing valid options and associated parameters.
      */
-    private Options defineSharedOptions() {
+    protected final Options defineBaseOptions() {
         Options options = new Options();
 
         options.addOption(
-                Option.builder(SharedCLIOptionConstants.OPT_HELP)
-                        .longOpt(SharedCLIOptionConstants.LONG_OPT_HELP)
+                Option.builder(CLIBaseOptionConstants.OPT_HELP)
+                        .longOpt(CLIBaseOptionConstants.LONG_OPT_HELP)
                         .desc("Displays this help information.")
                         .build()
         );
         options.addOption(
-                Option.builder(SharedCLIOptionConstants.OPT_DEBUG)
-                        .longOpt(SharedCLIOptionConstants.LONG_OPT_DEBUG)
+                Option.builder(CLIBaseOptionConstants.OPT_DEBUG)
+                        .longOpt(CLIBaseOptionConstants.LONG_OPT_DEBUG)
                         .desc("A flag used for debugging and development purposes. < -X | --debug >")
                         .build()
         );
         options.addOption(
-                Option.builder(SharedCLIOptionConstants.OPT_INPUT)
-                        .longOpt(SharedCLIOptionConstants.LONG_OPT_INPUT)
+                Option.builder(CLIBaseOptionConstants.OPT_INPUT)
+                        .longOpt(CLIBaseOptionConstants.LONG_OPT_INPUT)
                         .hasArg()
                         .desc("Full input path and file specification. Default: input comes from STDIN rather than a file.")
                         .build()
         );
         options.addOption(
-                Option.builder(SharedCLIOptionConstants.OPT_OUTPUT)
-                        .longOpt(SharedCLIOptionConstants.LONG_OPT_OUTPUT)
+                Option.builder(CLIBaseOptionConstants.OPT_OUTPUT)
+                        .longOpt(CLIBaseOptionConstants.LONG_OPT_OUTPUT)
                         .hasArg()
                         .desc("Full output path and file specification. Default: output sent to STDOUT rather than a file.")
                         .build()
@@ -94,24 +80,36 @@ public abstract class AbstractTemplate implements Template {
         return options;
     }
 
-    private CommandLine parseCommandline(final Options options, final String[] cmdline) throws ParseException {
-
-        // Apache Commons CLI - Step #2 of 3: Parse all command-line parameters
-        CommandLine parsed;
-        CommandLineParser parser = new DefaultParser();
-
+    /**
+     * This method is the 2nd of 3 steps that Apache CLI uses to process command-line options. It takes as input
+     * all basic and extended option definitions and the command-line used when the application was launched.  It
+     * then produces an intermediary object from which to query the existence and values found on the command-line.
+     *
+     * @param options Options type defined in Apache Commons CLI artifact
+     * @param cmdlineArgs command-line when application was invoked
+     * @return Commandline intermediary object created by Apache Commons CLI from which to query the
+     *         existence of defined options and their respective values
+     * @throws ParseException type defined in Apache Commons CLI artifact
+     */
+    protected final CommandLine parseCommandline(final Options options, final String[] cmdlineArgs) throws ParseException {
         try {
-            parsed = parser.parse(options, cmdline);
+            return new DefaultParser().parse(options, cmdlineArgs);
         } catch (ParseException e) {
-//            String errMsg = this.getClass().getSimpleName() + ": " + e.getMessage();
             String errMsg = appName + ": " + e.getMessage();
             throw new ParseException(errMsg);
         }
-
-        return parsed;
     }
 
-    private Builder resolveSharedOptions(final CommandLine parsedCommandline, final Builder builder) {
+    /**
+     * This method is the final step that Apache CLI uses to process command-line options. It accepts
+     * the intermediary Commandline intermediary object created by Apache Commons CLI and uses a Builder subtype
+     * to set Configuration properties that correspond to the options defined in step 1.
+     *
+     * @param parsedCommandline Commandline intermediary object created by Apache Commons CLI
+     * @param builder Builder subclass used for setting Configuration properties
+     * @return Updated Builder object used to create a Configuration object
+     */
+    protected final Builder resolveBaseOptions(final CommandLine parsedCommandline, final Builder builder) {
         processCommandline(builder);
         processAppName(builder);
         processPID(builder);
@@ -126,11 +124,11 @@ public abstract class AbstractTemplate implements Template {
     }
 
     private void processDebugModeFlag(final Builder builder, final CommandLine parsedCommandline) {
-        builder.setIsDebugMode(parsedCommandline.hasOption(SharedCLIOptionConstants.LONG_OPT_DEBUG));
+        builder.setIsDebugMode(parsedCommandline.hasOption(CLIBaseOptionConstants.LONG_OPT_DEBUG));
     }
 
     private void processShowHelpFlag(final Builder builder, final CommandLine parsedCommandline) {
-        if (parsedCommandline.hasOption((SharedCLIOptionConstants.LONG_OPT_HELP))) {
+        if (parsedCommandline.hasOption((CLIBaseOptionConstants.LONG_OPT_HELP))) {
             builder.setShowHelpPrompt(true);
             printHelpText();
         } else {
@@ -160,18 +158,18 @@ public abstract class AbstractTemplate implements Template {
     }
 
     private void processInputFilename(final Builder builder, final CommandLine parsedCommandline) {
-        if (parsedCommandline.hasOption(SharedCLIOptionConstants.OPT_INPUT)) {
+        if (parsedCommandline.hasOption(CLIBaseOptionConstants.OPT_INPUT)) {
             builder.setUsesInputFile(true);
-            builder.setInputFilename(java.util.Optional.ofNullable(parsedCommandline.getOptionValue(SharedCLIOptionConstants.OPT_INPUT)));
+            builder.setInputFilename(java.util.Optional.ofNullable(parsedCommandline.getOptionValue(CLIBaseOptionConstants.OPT_INPUT)));
         } else {
             builder.setInputFilename(java.util.Optional.empty());
         }
     }
 
     private void processOutputFilename(final Builder builder, final CommandLine parsedCommandline) {
-        if (parsedCommandline.hasOption(SharedCLIOptionConstants.OPT_OUTPUT)) {
+        if (parsedCommandline.hasOption(CLIBaseOptionConstants.OPT_OUTPUT)) {
             builder.setUsesOutputFile(true);
-            builder.setOutputFilename(java.util.Optional.ofNullable(parsedCommandline.getOptionValue(SharedCLIOptionConstants.OPT_OUTPUT)));
+            builder.setOutputFilename(java.util.Optional.ofNullable(parsedCommandline.getOptionValue(CLIBaseOptionConstants.OPT_OUTPUT)));
         } else {
             builder.setOutputFilename(java.util.Optional.empty());
         }
@@ -180,7 +178,7 @@ public abstract class AbstractTemplate implements Template {
     /**
      * Constants shared when processing all command-line options
      */
-    public static class SharedCLIOptionConstants {
+    public static class CLIBaseOptionConstants {
 
         public static final String OPT_HELP = "h";
         public static final String LONG_OPT_HELP = "help";
@@ -195,7 +193,5 @@ public abstract class AbstractTemplate implements Template {
         public static final String LONG_OPT_OUTPUT = "output";
 
     }
-
-    protected abstract Builder resolveExtendedOptions(CommandLine parsedCommandline, Builder builder);
 
 }

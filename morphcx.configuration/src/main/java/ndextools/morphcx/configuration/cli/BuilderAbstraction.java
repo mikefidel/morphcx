@@ -12,7 +12,7 @@ import java.util.Optional;
  * It will be extended by sub-interfaces having Configuration type-specific properties and methods.
  * The setter methods herein are called by methods in Template implementations.
  */
-public abstract class AbstractBuilder implements Builder {
+public abstract class BuilderAbstraction implements Builder {
     protected String[] commandline;
     protected String appName;
     protected String processId;

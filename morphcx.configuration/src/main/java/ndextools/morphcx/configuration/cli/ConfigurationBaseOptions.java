@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * ConfigurationImpl is the implementation class for a default configuration object.
+ * Implementation class for instantiating a base options type configuration object.
  */
-public class ConfigurationImpl extends AbstractConfiguration {
+public class ConfigurationBaseOptions extends ConfigurationAbstraction {
 
-    public ConfigurationImpl(
+    public ConfigurationBaseOptions(
             String[] commandline,
             String appName,
             String processId,
@@ -32,11 +32,11 @@ public class ConfigurationImpl extends AbstractConfiguration {
 
     /**
      * Overrides Object.toString()
-     * @return state of the SimpleConfiguration object properties as a formatted string.
+     * @return Configuration object properties as a formatted string
      */
     @Override
     public String toString() {
-        return "ConfigurationImpl{" +
+        return "ConfigurationBaseOptions{" +
                 "commandline=" + Arrays.toString(getCommandline()) +
                 ", appName=" + getAppName() +
                 ", processId=" + getProcessId() +

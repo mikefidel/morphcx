@@ -9,7 +9,7 @@ import java.util.Optional;
  *
  * Restricting its public interface to getter methods insures it's properties are immutable.
  */
-public abstract class AbstractConfiguration implements Configuration {
+public abstract class ConfigurationAbstraction implements Configuration {
     protected final String[] commandline;
     protected final String appName;
     protected final String processId;
@@ -33,7 +33,7 @@ public abstract class AbstractConfiguration implements Configuration {
      * @param inputFilename the complete input file specification (path + filename + extension)
      * @param outputFilename the complete output file specification (path + filename + extension)
      */
-    public AbstractConfiguration(
+    public ConfigurationAbstraction(
             String[] commandline,
             String appName,
             String processId,

@@ -25,8 +25,8 @@ public class ExportPOI {
 
     private static Configuration configureByCLI(final String[] commandline, final String appName)
             throws org.apache.commons.cli.ParseException {
-        Template template = new TemplateImpl(commandline, appName);
-        Builder builder = new BuilderImpl();
+        Template template = new TemplateBaseOptions(commandline, appName);
+        Builder builder = new BuilderBaseOptions();
         return template.configure(builder);
     }
 
