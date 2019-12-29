@@ -3,4 +3,5 @@ module morphcx.launcher.csv {
     requires morphcx.configuration;
     requires morphcx.processors.csv;
     requires morphcx.readers;
+    requires ndex.object.model;
 }

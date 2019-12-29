@@ -5,6 +5,7 @@ import ndextools.morphcx.configuration.cli.base.Template;
 import ndextools.morphcx.configuration.cli.csv.CSVBuilder;
 import ndextools.morphcx.configuration.cli.csv.CSVTemplate;
 import ndextools.morphcx.readers.nicecx.ToNiceCX;
+import org.ndexbio.model.cx.NiceCXNetwork;
 
 import java.io.IOException;
 
@@ -39,7 +40,8 @@ public class ExportCSV {
     private static void dispatchByOperation(final Configuration cfg) throws IOException {
         if (!cfg.isShowHelpPrompt()) {
             ToNiceCX cxReader = new ToNiceCX(cfg);
-            NiceCXNetwork niceCX = cxReader.makeNiceCX();
+            NiceCXNetwork cx = cxReader.makeNiceCX();
+            // TODO add some test
         }
     }
 

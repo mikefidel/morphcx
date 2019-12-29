@@ -17,11 +17,11 @@
 
     <dependencies>
         <!-- NOT REGISTERED IN MAVEN CENTRAL REPOSITORY ! -->
-        <dependency>
-            <groupId>org.ndexbio</groupId>
-            <artifactId>ndex-object-model</artifactId>
-            <version>2.4.3</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.ndexbio</groupId>-->
+<!--            <artifactId>ndex-object-model</artifactId>-->
+<!--            <version>2.4.3</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.ndextools</groupId>
             <artifactId>morphcx.configuration</artifactId>

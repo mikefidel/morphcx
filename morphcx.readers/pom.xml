@@ -49,7 +49,7 @@
                                     <outputDirectory>../mods</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
-                            <stripVersion>true</stripVersion>
+                            <stripVersion>false</stripVersion>
                         </configuration>
                     </execution>
                 </executions>

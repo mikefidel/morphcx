@@ -1,7 +1,7 @@
 package ndextools.morphcx.readers.nicecx;
 
 import org.ndexbio.model.cx.NiceCXNetwork;
-import org.ndexbio.rest.client.NdexRestClientUtilities;
+import org.ndexbio.cxio.core.readers.NiceCXNetworkReader;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -19,12 +19,13 @@ public class ToNiceCX {
     public NiceCXNetwork makeNiceCX() throws IOException {
         NiceCXNetwork cx;
 
-        if (true) {
+        if (cfg.usesInputFile()) {
 
             try (InputStream input = new FileInputStream(String.valueOf(cfg.getInputFilename()));
                  BufferedInputStream bufferedInput = new BufferedInputStream(input))
             {
-                cx = NdexRestClientUtilities.getCXNetworkFromStream(bufferedInput);
+                NiceCXNetworkReader reader = new NiceCXNetworkReader();
+                cx = reader.readNiceCXNetwork(bufferedInput);
             }
             catch (Exception e) {
                 String msg = this.getClass().getSimpleName() + ": " + e.getMessage();
@@ -34,7 +35,8 @@ public class ToNiceCX {
         } else {
 
             try (BufferedInputStream bufferedInput = new BufferedInputStream(System.in)) {
-                cx = NdexRestClientUtilities.getCXNetworkFromStream(bufferedInput);
+                NiceCXNetworkReader reader = new NiceCXNetworkReader();
+                cx = reader.readNiceCXNetwork(bufferedInput);
             }
             catch (Exception e) {
                 String msg = this.getClass().getSimpleName() + ": " + e.getMessage();
