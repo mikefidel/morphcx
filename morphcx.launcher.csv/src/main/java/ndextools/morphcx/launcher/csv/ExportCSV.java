@@ -1,11 +1,12 @@
 package ndextools.morphcx.launcher.csv;
 
-import ndextools.morphcx.configuration.cli.base.Builder;
 import ndextools.morphcx.configuration.cli.base.Configuration;
 import ndextools.morphcx.configuration.cli.base.Template;
 import ndextools.morphcx.configuration.cli.csv.CSVBuilder;
-import ndextools.morphcx.configuration.cli.base.TemplateBaseOptions;
 import ndextools.morphcx.configuration.cli.csv.CSVTemplate;
+import ndextools.morphcx.readers.nicecx.ToNiceCX;
+
+import java.io.IOException;
 
 /**
  * Root program containing entry point to launch application by commandline.
@@ -35,11 +36,11 @@ public class ExportCSV {
         return template.configure(builder);
     }
 
-    private static void dispatchByOperation(final Configuration cfg) {
+    private static void dispatchByOperation(final Configuration cfg) throws IOException {
         if (!cfg.isShowHelpPrompt()) {
-            // TODO
+            ToNiceCX cxReader = new ToNiceCX(cfg);
+            NiceCXNetwork niceCX = cxReader.makeNiceCX();
         }
-        System.err.println(cfg.toString()); // TODO remove
     }
 
 }

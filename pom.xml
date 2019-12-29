@@ -14,6 +14,7 @@
         <module>morphcx.configuration</module>
         <module>morphcx.processors.poi</module>
         <module>morphcx.processors.csv</module>
+        <module>morphcx.readers</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -30,6 +31,7 @@
         <commons-cli>1.4</commons-cli>
         <commons-csv>1.7</commons-csv>
         <commons-poi-ooxml>4.1.0</commons-poi-ooxml>
+        <ndex-object-model>2.4.3</ndex-object-model>
     </properties>
 
     <dependencies>
